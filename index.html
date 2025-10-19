@@ -1,1 +1,554 @@
+<!DOCTYPE html>
+<html lang="ru">
 
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Моя дипломная презентация</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+		}
+
+		body {
+			background: #0a0a2a;
+			color: #fff;
+			min-height: 100vh;
+			overflow-x: hidden;
+			position: relative;
+		}
+
+		/* Стили для ночного неба */
+		.night-sky {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			z-index: -1;
+			overflow: hidden;
+		}
+
+		.star {
+			position: absolute;
+			background-color: #fff;
+			border-radius: 50%;
+			animation: twinkle 5s infinite;
+		}
+
+		@keyframes twinkle {
+
+			0%,
+			100% {
+				opacity: 0.2;
+			}
+
+			50% {
+				opacity: 1;
+			}
+		}
+
+		.moon {
+			position: absolute;
+			top: 10%;
+			right: 10%;
+			width: 80px;
+			height: 80px;
+			background: #f5f3ce;
+			border-radius: 50%;
+			box-shadow: 0 0 30px #f5f3ce;
+		}
+
+		.container {
+			max-width: 1000px;
+			margin: 0 auto;
+			padding: 20px;
+		}
+
+		header {
+			text-align: center;
+			padding: 30px 0;
+			margin-bottom: 20px;
+		}
+
+		h1 {
+			font-size: 2.5rem;
+			margin-bottom: 10px;
+			color: #6ab1ff;
+			text-shadow: 0 0 10px rgba(106, 177, 255, 0.7);
+		}
+
+		.subtitle {
+			font-size: 1.2rem;
+			color: #a8d0ff;
+		}
+
+		/* Стили для вкладок */
+		.tabs {
+			display: flex;
+			justify-content: center;
+			margin-bottom: 30px;
+			background: rgba(20, 30, 70, 0.7);
+			border-radius: 50px;
+			padding: 5px;
+			max-width: 600px;
+			margin: 0 auto 30px;
+		}
+
+		.tab {
+			padding: 12px 25px;
+			cursor: pointer;
+			border-radius: 50px;
+			transition: all 0.3s ease;
+			font-weight: 600;
+			text-align: center;
+			flex: 1;
+		}
+
+		.tab.active {
+			background: #3a5fc8;
+			box-shadow: 0 0 15px rgba(58, 95, 200, 0.7);
+		}
+
+		.tab:hover:not(.active) {
+			background: rgba(58, 95, 200, 0.3);
+		}
+
+		/* Стили для содержимого вкладок */
+		.tab-content {
+			display: none;
+			background: rgba(15, 25, 60, 0.8);
+			border-radius: 15px;
+			padding: 30px;
+			box-shadow: 0 0 20px rgba(0, 20, 100, 0.5);
+			backdrop-filter: blur(5px);
+			min-height: 400px;
+		}
+
+		.tab-content.active {
+			display: block;
+			animation: fadeIn 0.5s ease;
+		}
+
+		@keyframes fadeIn {
+			from {
+				opacity: 0;
+				transform: translateY(10px);
+			}
+
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+
+		/* Стили для первой вкладки */
+		.about-content {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 30px;
+			align-items: center;
+		}
+
+		.profile-img {
+			flex: 1;
+			min-width: 200px;
+			text-align: center;
+		}
+
+		.profile-img-placeholder {
+			width: 200px;
+			height: 200px;
+			border-radius: 50%;
+			background: linear-gradient(135deg, #3a5fc8, #6ab1ff);
+			margin: 0 auto;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 4rem;
+			color: white;
+			box-shadow: 0 0 20px rgba(106, 177, 255, 0.5);
+		}
+
+		.about-text {
+			flex: 2;
+			min-width: 300px;
+		}
+
+		.about-text h2 {
+			color: #6ab1ff;
+			margin-bottom: 15px;
+			border-bottom: 2px solid #3a5fc8;
+			padding-bottom: 5px;
+		}
+
+		.about-text p {
+			margin-bottom: 15px;
+			line-height: 1.6;
+		}
+
+		.skills {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 10px;
+			margin-top: 20px;
+		}
+
+		.skill {
+			background: rgba(58, 95, 200, 0.3);
+			padding: 8px 15px;
+			border-radius: 20px;
+			font-size: 0.9rem;
+			border: 1px solid #3a5fc8;
+		}
+
+		/* Стили для второй вкладки */
+		.works-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+			gap: 20px;
+		}
+
+		.work-card {
+			background: rgba(30, 40, 90, 0.7);
+			border-radius: 10px;
+			overflow: hidden;
+			transition: transform 0.3s ease, box-shadow 0.3s ease;
+			border: 1px solid #3a5fc8;
+			display: flex;
+			flex-direction: column;
+		}
+
+		.work-card:hover {
+			transform: translateY(-5px);
+			box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+		}
+
+		.work-img {
+			height: 160px;
+			background: linear-gradient(135deg, #3a5fc8, #6ab1ff);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 3rem;
+			color: white;
+		}
+
+		.work-info {
+			padding: 15px;
+			flex-grow: 1;
+			display: flex;
+			flex-direction: column;
+		}
+
+		.work-info h3 {
+			margin-bottom: 10px;
+			color: #6ab1ff;
+		}
+
+		.work-info p {
+			font-size: 0.9rem;
+			line-height: 1.5;
+			color: #d0e2ff;
+			flex-grow: 1;
+			margin-bottom: 15px;
+		}
+
+		.project-link {
+			display: inline-block;
+			padding: 10px 15px;
+			background: #3a5fc8;
+			color: white;
+			text-decoration: none;
+			border-radius: 5px;
+			transition: all 0.3s ease;
+			font-weight: 600;
+			text-align: center;
+			border: none;
+			cursor: pointer;
+			margin-top: auto;
+		}
+
+		.project-link:hover {
+			background: #2a4fb0;
+			box-shadow: 0 0 10px rgba(58, 95, 200, 0.7);
+			transform: translateY(-2px);
+		}
+
+		/* Стили для третьей вкладки */
+		.goodbye-content {
+			text-align: center;
+			padding: 40px 20px;
+		}
+
+		.goodbye-content h2 {
+			font-size: 2.5rem;
+			margin-bottom: 20px;
+			color: #6ab1ff;
+		}
+
+		.goodbye-content p {
+			font-size: 1.2rem;
+			line-height: 1.6;
+			max-width: 700px;
+			margin: 0 auto 30px;
+		}
+
+		.contact-info {
+			display: flex;
+			justify-content: center;
+			gap: 20px;
+			flex-wrap: wrap;
+			margin-top: 30px;
+		}
+
+		.contact-item {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			padding: 10px 20px;
+			background: rgba(58, 95, 200, 0.3);
+			border-radius: 30px;
+			border: 1px solid #3a5fc8;
+		}
+
+		.icon {
+			font-size: 1.5rem;
+		}
+
+		.signature {
+			margin-top: 40px;
+			font-size: 1.5rem;
+			color: #a8d0ff;
+			font-style: italic;
+		}
+
+		/* Адаптивность */
+		@media (max-width: 768px) {
+			.tabs {
+				flex-direction: column;
+				border-radius: 15px;
+			}
+
+			.about-content {
+				flex-direction: column;
+				text-align: center;
+			}
+
+			.skills {
+				justify-content: center;
+			}
+
+			h1 {
+				font-size: 2rem;
+			}
+
+			.works-grid {
+				grid-template-columns: 1fr;
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<!-- Фон ночного неба -->
+	<div class="night-sky" id="nightSky">
+		<div class="moon"></div>
+	</div>
+
+	<div class="container">
+		<header>
+			<h1>Моя дипломная презентация</h1>
+			<p class="subtitle">Итоги моего обучения и достижения</p>
+		</header>
+
+		<!-- Вкладки -->
+		<div class="tabs">
+			<div class="tab active" data-tab="about">Обо мне</div>
+			<div class="tab" data-tab="works">Мои работы</div>
+			<div class="tab" data-tab="goodbye">Завершение</div>
+		</div>
+
+		<!-- Содержимое вкладок -->
+		<div class="tab-content active" id="about">
+			<div class="about-content">
+				<div class="profile-img">
+					<div class="profile-img-placeholder">👤</div>
+				</div>
+				<div class="about-text">
+					<h2>Приветствую!</h2>
+					<p>Меня зовут Иван Кутеев, и я студент университета по специальности "Веб-разработка и дизайн".</p>
+					<p>За время обучения я глубоко погрузился в мир веб-технологий, развивая как теоретические знания,
+						так и практические навыки. Мне особенно интересны фронтенд-разработка, UI/UX дизайн и создание
+						интерактивных пользовательских интерфейсов.</p>
+					<p>В процессе обучения я участвовал в различных проектах, хакатонах и мероприятиях, что позволило
+						мне получить ценный опыт и развить профессиональные компетенции.</p>
+
+					<h3>Мои навыки:</h3>
+					<div class="skills">
+						<div class="skill">HTML/CSS</div>
+						<div class="skill">JavaScript</div>
+						<div class="skill">React</div>
+						<div class="skill">UI/UX Design</div>
+						<div class="skill">Git</div>
+						<div class="skill">Адаптивная верстка</div>
+						<div class="skill">Figma</div>
+						<div class="skill">Node.js</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="tab-content" id="works">
+			<h2 style="text-align: center; margin-bottom: 20px; color: #6ab1ff;">Мои работы и проекты</h2>
+			<div class="works-grid">
+				<div class="work-card">
+					<div class="work-img">🌐</div>
+					<div class="work-info">
+						<h3>Коллекция шрифтов</h3>
+						<p>Интерактивная веб-страница с подборкой и демонстрацией различных шрифтов. Позволяет
+							сравнивать и тестировать шрифты в реальном времени.</p>
+						<a href="https://vovakuteev7-create.github.io/fonts/" class="project-link"
+							target="_blank">Посмотреть проект</a>
+					</div>
+				</div>
+				<div class="work-card">
+					<div class="work-img">🧪</div>
+					<div class="work-info">
+						<h3>Тестовый проект</h3>
+						<p>Интерактивная веб-страница с различными элементами и функциями для тестирования и
+							демонстрации возможностей веб-разработки.</p>
+						<a href="https://vovakuteev7-create.github.io/test/" class="project-link"
+							target="_blank">Посмотреть проект</a>
+					</div>
+				</div>
+				<div class="work-card">
+					<div class="work-img">🎓</div>
+					<div class="work-info">
+						<h3>Дипломный проект</h3>
+						<p>Основной дипломный проект, демонстрирующий все полученные за время обучения навыки и знания в
+							области веб-разработки.</p>
+						<a href="https://vovakuteev7-create.github.io/diplom/" class="project-link"
+							target="_blank">Посмотреть проект</a>
+					</div>
+				</div>
+				<div class="work-card">
+					<div class="work-img">🛒</div>
+					<div class="work-info">
+						<h3>Интернет-магазин</h3>
+						<p>Полнофункциональный интернет-магазин с системой управления товарами, корзиной и процессом
+							оформления заказа.</p>
+						<button class="project-link">Скоро будет</button>
+					</div>
+				</div>
+				<div class="work-card">
+					<div class="work-img">🎮</div>
+					<div class="work-info">
+						<h3>Интерактивная игра</h3>
+						<p>Разработка браузерной игры с использованием Canvas API и продвинутой графикой.</p>
+						<button class="project-link">Скоро будет</button>
+					</div>
+				</div>
+				<div class="work-card">
+					<div class="work-img">🔧</div>
+					<div class="work-info">
+						<h3>Библиотека компонентов</h3>
+						<p>Создание переиспользуемой библиотеки UI-компонентов для ускорения процесса разработки.</p>
+						<button class="project-link">Скоро будет</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="tab-content" id="goodbye">
+			<div class="goodbye-content">
+				<h2>Спасибо за внимание!</h2>
+				<p>За время обучения я приобрел не только знания и навыки, но и ценный опыт, который буду использовать в
+					своей будущей профессиональной деятельности.</p>
+				<p>Я благодарен своим преподавателям, наставникам и коллегам за поддержку и помощь на этом пути.</p>
+				<p>Надеюсь, мои работы демонстрируют мой потенциал и стремление к развитию в выбранной области.</p>
+
+				<div class="contact-info">
+					<div class="contact-item">
+						<span class="icon">📧</span>
+						<span>ivan.kuteev@example.com</span>
+					</div>
+					<div class="contact-item">
+						<span class="icon">📱</span>
+						<span>+7 (999) 123-45-67</span>
+					</div>
+					<div class="contact-item">
+						<span class="icon">🔗</span>
+						<span>github.com/vovakuteev7-create</span>
+					</div>
+				</div>
+
+				<div class="signature">
+					С уважением, Кутеев Вова
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		// Создание звездного неба
+        function createStars() {
+            const nightSky = document.getElementById('nightSky');
+            const starCount = 200;
+            
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                
+                // Случайный размер и позиция
+                const size = Math.random() * 3;
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100;
+                const delay = Math.random() * 5;
+                
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                star.style.left = `${posX}%`;
+                star.style.top = `${posY}%`;
+                star.style.animationDelay = `${delay}s`;
+                
+                nightSky.appendChild(star);
+            }
+        }
+
+        // Переключение вкладок
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Убираем активный класс у всех вкладок и содержимого
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
+                // Добавляем активный класс к выбранной вкладке
+                tab.classList.add('active');
+                
+                // Показываем соответствующее содержимое
+                const tabId = tab.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+
+        // Обработка кнопок "Скоро будет"
+        document.querySelectorAll('.project-link').forEach(link => {
+            if (link.tagName === 'BUTTON') {
+                link.addEventListener('click', () => {
+                    alert('Этот проект находится в разработке и скоро будет доступен!');
+                });
+            }
+        });
+
+        // Инициализация при загрузке страницы
+        window.addEventListener('load', () => {
+            createStars();
+        });
+	</script>
+</body>
+
+</html>
