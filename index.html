@@ -21,7 +21,7 @@
 			position: relative;
 		}
 
-		/* Стили для ночного неба */
+		
 		.night-sky {
 			position: fixed;
 			top: 0;
@@ -86,7 +86,7 @@
 			color: #a8d0ff;
 		}
 
-		/* Стили для вкладок */
+
 		.tabs {
 			display: flex;
 			justify-content: center;
@@ -117,7 +117,7 @@
 			background: rgba(58, 95, 200, 0.3);
 		}
 
-		/* Стили для содержимого вкладок */
+		
 		.tab-content {
 			display: none;
 			background: rgba(15, 25, 60, 0.8);
@@ -145,7 +145,7 @@
 			}
 		}
 
-		/* Стили для первой вкладки */
+		
 		.about-content {
 			display: flex;
 			flex-wrap: wrap;
@@ -205,7 +205,7 @@
 			border: 1px solid #3a5fc8;
 		}
 
-		/* Стили для второй вкладки */
+		
 		.works-grid {
 			display: grid;
 			grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -278,7 +278,7 @@
 			transform: translateY(-2px);
 		}
 
-		/* Стили для третьей вкладки */
+
 		.goodbye-content {
 			text-align: center;
 			padding: 40px 20px;
@@ -326,7 +326,7 @@
 			font-style: italic;
 		}
 
-		/* Адаптивность */
+	
 		@media (max-width: 768px) {
 			.tabs {
 				flex-direction: column;
@@ -494,7 +494,7 @@
 	</div>
 
 	<script>
-		// Создание звездного неба
+	
         function createStars() {
             const nightSky = document.getElementById('nightSky');
             const starCount = 200;
@@ -503,7 +503,7 @@
                 const star = document.createElement('div');
                 star.classList.add('star');
                 
-                // Случайный размер и позиция
+            
                 const size = Math.random() * 3;
                 const posX = Math.random() * 100;
                 const posY = Math.random() * 100;
@@ -519,23 +519,23 @@
             }
         }
 
-        // Переключение вкладок
+
         document.querySelectorAll('.tab').forEach(tab => {
             tab.addEventListener('click', () => {
-                // Убираем активный класс у всех вкладок и содержимого
+              
                 document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
                 document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
                 
-                // Добавляем активный класс к выбранной вкладке
+            
                 tab.classList.add('active');
                 
-                // Показываем соответствующее содержимое
+ 
                 const tabId = tab.getAttribute('data-tab');
                 document.getElementById(tabId).classList.add('active');
             });
         });
 
-        // Обработка кнопок "Скоро будет"
+    
         document.querySelectorAll('.project-link').forEach(link => {
             if (link.tagName === 'BUTTON') {
                 link.addEventListener('click', () => {
@@ -544,7 +544,7 @@
             }
         });
 
-        // Инициализация при загрузке страницы
+     
         window.addEventListener('load', () => {
             createStars();
         });
