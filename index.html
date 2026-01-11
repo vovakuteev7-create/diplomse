@@ -124,16 +124,22 @@
 			color: #a259ff;
 		}
 
+		.tool-link.jsitor {
+			background: rgba(255, 209, 102, 0.2);
+			border-color: #ffd166;
+			color: #ffd166;
+		}
+
 		.tool-link.stackblitz {
 			background: rgba(20, 158, 202, 0.2);
 			border-color: #149eca;
 			color: #149eca;
 		}
 
-		.tool-link.jsitor {
-			background: rgba(255, 209, 102, 0.2);
-			border-color: #ffd166;
-			color: #ffd166;
+		.tool-link.codepen {
+			background: rgba(0, 0, 0, 0.3);
+			border-color: #47cf73;
+			color: #47cf73;
 		}
 
 		.tool-link:hover {
@@ -153,16 +159,22 @@
 			box-shadow: 0 0 15px rgba(162, 89, 255, 0.7);
 		}
 
+		.tool-link.jsitor:hover {
+			background: #ffd166;
+			color: #333;
+			box-shadow: 0 0 15px rgba(255, 209, 102, 0.7);
+		}
+
 		.tool-link.stackblitz:hover {
 			background: #149eca;
 			color: white;
 			box-shadow: 0 0 15px rgba(20, 158, 202, 0.7);
 		}
 
-		.tool-link.jsitor:hover {
-			background: #ffd166;
-			color: #333;
-			box-shadow: 0 0 15px rgba(255, 209, 102, 0.7);
+		.tool-link.codepen:hover {
+			background: #47cf73;
+			color: white;
+			box-shadow: 0 0 15px rgba(71, 207, 115, 0.7);
 		}
 
 		.tool-link:active {
@@ -364,11 +376,14 @@
 				<a href="https://www.figma.com/" target="_blank" class="tool-link figma">
 					<i class="fab fa-figma"></i> Figma
 				</a>
+				<a href="https://jsitor.com/" target="_blank" class="tool-link jsitor">
+					<i class="fas fa-code"></i> JSitor
+				</a>
 				<a href="https://stackblitz.com/" target="_blank" class="tool-link stackblitz">
 					<i class="fas fa-bolt"></i> StackBlitz
 				</a>
-				<a href="https://jsitor.com/" target="_blank" class="tool-link jsitor">
-					<i class="fas fa-code"></i> JSitor
+				<a href="https://codepen.io/" target="_blank" class="tool-link codepen">
+					<i class="fab fa-codepen"></i> CodePen
 				</a>
 			</div>
 		</header>
@@ -395,6 +410,7 @@
 						идею, а уже потом делать ее в html.
 						Потом мы перешли на StackBlitz - у него бесплатный хостинг, но если ты сделал какую-либо работу,
 						то посмотреть ее сможешь только ты.
+						Также мы использовали CodePen для быстрого прототипирования и демонстрации кода.
 						Еще мы использовали Telegram, который помогал нам в виде ботов.</p>
 					<p>В процессе обучения я участвовал в различных проектах и мероприятиях, что позволило
 						мне получить ценный опыт и развить профессиональные компетенции.</p>
@@ -415,8 +431,16 @@
 					<p>Создание дизайн-макетов и прототипов для различных веб-приложений и сайтов.</p>
 				</div>
 				<div class="work-item">
-					<h3>Работы на StackBlitz</h3>
+					<h3>Работы на JSitor</h3>
+					<p>Быстрое прототипирование и тестирование кода в онлайн-редакторе.</p>
+				</div>
+				<div class="work-item">
+					<h3>Проекты на StackBlitz</h3>
 					<p>Разработка интерактивных веб-приложений с использованием современных технологий.</p>
+				</div>
+				<div class="work-item">
+					<h3>Работы на CodePen</h3>
+					<p>Создание интерактивных примеров кода и мини-проектов для демонстрации навыков.</p>
 				</div>
 			</div>
 		</div>
@@ -432,12 +456,12 @@
 					С уважением,<br>
 					Кутеев Вова
 				</div>
-				</div>
 			</div>
 		</div>
+	</div>
 
-		<script>
-			// Создание звездного неба
+	<script>
+		// Создание звездного неба
 		function createStars() {
 			const nightSky = document.getElementById('nightSky');
 			const starCount = 150;
@@ -488,7 +512,7 @@
 		document.addEventListener('DOMContentLoaded', () => {
 			createStars();
 		});
-		</script>
+	</script>
 </body>
 
 </html>
